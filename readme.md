@@ -42,18 +42,17 @@ python tests.py
 
 API Endpoints:
 =========
-GET http://127.0.0.1:5000/api/todolists - list of todo lists
-POST http://127.0.0.1:5000/api/todolists - create a todo list
-GET http://127.0.0.1:5000/todolists/<int:id>  - get one todo list by id
-POST http://127.0.0.1:5000/todolists/<int:todolist_id>/add_task/<int:task_id> - add task by task_id to todo list with todolist_id
-GET http://127.0.0.1:5000/todolists/<int:id>/tasks - get list of tasks for todo list with todolist_id
-
-GET  http://127.0.0.1:5000/api/tasks - list of all tasks
-POST  http://127.0.0.1:5000/api/tasks - create a task
-GET http://127.0.0.1:5000/tasks/<int:id> - get one task by task_id
-PUT http://127.0.0.1:5000/tasks/<int:id> - edit one task by task_id
-DELETE http://127.0.0.1:5000/tasks/<int:id> - delete one task by task_id
-PUT http://127.0.0.1:5000/tasks/<int:id>/finish - mark task finished
+- GET http://127.0.0.1:5000/api/todolists - list of todo lists
+- POST http://127.0.0.1:5000/api/todolists - create a todo list
+- GET http://127.0.0.1:5000/todolists/<int:id>  - get one todo list by id
+- POST http://127.0.0.1:5000/todolists/<int:todolist_id>/add_task/<int:task_id> - add task by task_id to todo list with todolist_id
+- GET http://127.0.0.1:5000/todolists/<int:id>/tasks - get list of tasks for todo list with todolist_id
+- GET  http://127.0.0.1:5000/api/tasks - list of all tasks
+- POST  http://127.0.0.1:5000/api/tasks - create a task
+- GET http://127.0.0.1:5000/tasks/<int:id> - get one task by task_id
+- PUT http://127.0.0.1:5000/tasks/<int:id> - edit one task by task_id
+- DELETE http://127.0.0.1:5000/tasks/<int:id> - delete one task by task_id
+- PUT http://127.0.0.1:5000/tasks/<int:id>/finish - mark task finished
 
 
 Example of commands for testing:
