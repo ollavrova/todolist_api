@@ -3,8 +3,15 @@ Example api project
 Simple TODO list app API with python flask and a SQL backend.
 Used - python3.6, flask, flask_restful, flask_testing, Sqlite, SQLAlchemy, Flask Blueprints
 
+Application allows:  
+- Create multiple TODO lists.
+- Add a task to the TODO list.
+- Get all tasks from one TODO list.
+- Delete task.
+- Edit task.
+- Finish task.
 
-Working:
+Work:
 ========
 Clone a project, go to the project folder. Create a virtual environment, install requirements :
 ```bash
