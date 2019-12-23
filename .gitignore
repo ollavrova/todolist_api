@@ -1,0 +1,21 @@
+*.py[co]
+__pycache__
+
+# Translations compiled files
+*.mo
+
+# Local development ignores
+venv3
+venv
+env
+*.sqlite
+*.db
+
+# Production config
+local.cfg
+
+# Static
+static/libs/*
+
+# Other stuff here
+.idea
