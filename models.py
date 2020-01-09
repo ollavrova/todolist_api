@@ -34,7 +34,7 @@ class Task(db.Model):
 
 class TaskSchema(Schema):
     id = mfields.Integer(dump_only=True)
-    timestamp = mfields.Timestamp(tzinfo=pytz.utc)
+    timestamp = mfields.DateTime()
     name = mfields.String(required=True)
     done = mfields.Boolean()
     todolist_id = mfields.Integer(required=True)
