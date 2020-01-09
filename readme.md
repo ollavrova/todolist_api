@@ -17,12 +17,12 @@ Clone a project, go to the project folder. Create a virtual environment, install
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+pip install pip --upgrade
 pip install -r requirements.txt
 ```
 
 Create databade:
 ```bash
-python migrate.py db init
 python migrate.py db migrate
 python migrate.py db upgrade
 
@@ -36,7 +36,7 @@ python run.py
 
 Testing:
 =======
-```
+```bash
 python tests.py
 ```
 
@@ -58,14 +58,40 @@ API Endpoints:
 Example of commands for testing:
 - you can use curl or python requests package
 
+
 $ python3
 import requests
-requests.get('http://127.0.0.1:5000/api/todolists')
+requests.get('http://127.0.0.1:5000/api/todolists') - get a list of todolists
+
 or
 
-MIMETYPE="application/json"
-HOST=127.0.0.1:5000
-curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todolist -X POST -d '{"name":"1234"}'
+Create a todo list: 
+
+```bash
+$ MIMETYPE="application/json"
+$ HOST=127.0.0.1:5000
+$ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todolists -X POST -d '{"name":"1234"}'
+
+```
+response: 
+```bash
+{
+    "status": "success",
+    "todolist": {
+        "tasks": [],
+        "timestamp": "2020-01-09T08:22:47.168704",
+        "name": "1234",
+        "id": 1
+    }
+}
+
+```
+
+Get a list of todolists: 
+
+curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todolists 
+response:
+
 ```bash
 {
     "status": "success",
@@ -104,6 +130,7 @@ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todoli
     ]
 }
 ```
+Get one todo list by id=1: 
 
 $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todolists/1
 ```bash
@@ -135,7 +162,7 @@ $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todo
         ]
  ```   
  
-
+Get all tasks for todolist with id=1: 
 $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todolists/1/tasks
 ```bash
 {
@@ -165,6 +192,8 @@ $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/todo
     ]
 }
 ```
+
+Get list of tasks: 
 
 $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/tasks
 ```bash
@@ -212,7 +241,7 @@ $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" http://$HOST/api/task
     }
 }
 ```
-create a task
+Create a task:
 
 $ curl -H "Accept: $MIMETYPE" -H "Content-Type: $MIMETYPE" $HOST/api/tasks -X POST -d '{"name":"654654", "todolist_id":"2"}'
 ```bash{
