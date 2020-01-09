@@ -7,8 +7,8 @@ api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
 # Routes
-api.add_resource(TodoListAPI, '/todolists', '/todolists/<int:id>')
+api.add_resource(TodoListAPI, '/todolists', '/todolists/<int:pk>')
 api.add_resource(TodoListAddTaskToList, '/todolists/<int:todolist_id>/add_task/<int:task_id>')
-api.add_resource(TodoListTasks, '/todolists/<int:id>/tasks')
-api.add_resource(TaskAPI, '/tasks', '/tasks/<int:id>')
-api.add_resource(TaskFinish,  '/tasks/<int:id>/finish')
+api.add_resource(TodoListTasks, '/todolists/<int:pk>/tasks')
+api.add_resource(TaskAPI, '/tasks', '/tasks/<int:pk>')
+api.add_resource(TaskFinish,  '/tasks/<int:pk>/finish')

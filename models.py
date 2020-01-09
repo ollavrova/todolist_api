@@ -8,7 +8,7 @@ ma = Marshmallow()
 db = SQLAlchemy()
 
 
-# Flask-SQLAlchemy model definitions #
+# Flask-SQLAlchemy model definitions
 class TodoList(db.Model):
     __tablename__ = 'todolist'
     id = db.Column(db.Integer, primary_key=True)

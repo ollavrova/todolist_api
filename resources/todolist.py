@@ -10,20 +10,17 @@ todolists_schema = TodoSchema(many=True)
 
 class TodoListAPI(Resource):
 
-    def get(self, id=False):
+    def get(self, pk=False):
         """
         get one by id or list of todolists
-        :param id: int, todolist id
+        :param pk: int, todolist id
         :return:
         """
 
-        if id:
-            try:
-                todolist = TodoList.query.get(id)
-                if not todolist:
-                    return {'status': 'error', 'message': 'Todolist is not found'}, 400
-            except:
-                return {'status': 'error', 'message': 'Todolist is not found'}, 400
+        if pk:
+            todolist = TodoList.query.get(pk)
+            if not todolist:
+                return {'status': 'error', 'message': 'Todolist is not found'}, 404
             data = todo_schema.dump(todolist)
             return {"status": "success", "todolist": data}, 200
         else:
@@ -64,15 +61,12 @@ class TodoListTasks(Resource):
     endpoint that show list of tasks by todolist_id
     """
 
-    def get(self, id):
-        try:
-            todolist = TodoList.query.get(id)
-            if not todolist:
-                return {'status': 'error', 'message': 'Todolist for tasks list is not found'}, 400
-        except:
+    def get(self, pk):
+        todolist = TodoList.query.get(pk)
+        if not todolist:
             return {'status': 'error', 'message': 'Todolist for tasks list is not found'}, 400
         # Validate and deserialize input
-        tasks = Task.query.filter_by(todolist_id=id).all()
+        tasks = Task.query.filter_by(todolist_id=pk).all()
         data = tasks_schema.dump(tasks)
         return {'status': 'success', 'tasks': data}, 200
 

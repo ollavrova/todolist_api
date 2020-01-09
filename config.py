@@ -1,3 +1,11 @@
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+class TestConfig(object):
+    TESTING = True
+    CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.sqlite'
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    LIVESERVER_PORT = 8943

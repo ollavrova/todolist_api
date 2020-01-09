@@ -2,21 +2,14 @@ import json
 import unittest
 from flask import Flask
 from app import api_bp
+from config import TestConfig
 from models import db
 from flask_testing import TestCase
 
 
-class Config(object):
-    TESTING = True
-    CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.sqlite'
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-    LIVESERVER_PORT = 8943
-
-
 def create_test_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(TestConfig)
     app.register_blueprint(api_bp, url_prefix='/api')
     db.init_app(app)
     app.app_context().push()
@@ -24,10 +17,6 @@ def create_test_app():
 
 
 class TestCase(TestCase):
-    TESTING = True
-    CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.sqlite'
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
     headers = {
                 'Accept': 'application/vnd.api+json',
                 'Content-Type': 'application/vnd.api+json'

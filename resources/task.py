@@ -10,16 +10,16 @@ task_done = TaskDone()
 
 class TaskAPI(Resource):
 
-    def get(self, id=False):
+    def get(self, pk=False):
         """
         get one by id or list of tasks
-        :param id: int, task id
+        :param pk: int, task id
         :return:
         """
-        if id:
-            task = Task.query.get(id)
+        if pk:
+            task = Task.query.get(pk)
             if not task:
-                return {'status': 'error', 'message': 'Task not found'}, 400
+                return {'status': 'error', 'message': 'Task not found'}, 404
             data = task_schema.dump(task)
             return {"status": "success", "task": data}, 200
         else:
@@ -56,10 +56,10 @@ class TaskAPI(Resource):
 
         return {'status': "success", 'task': result}, 201
 
-    def put(self, id):
+    def put(self, pk):
         """
         editing of task
-        :param id: task id
+        :param pk: task id
         :return: saved instance and status code 204
         """
         json_data = request.get_json(force=True)
@@ -70,7 +70,7 @@ class TaskAPI(Resource):
         if errors:
              return errors, 422
         data = task_schema.load(json_data)
-        task = Task.query.get(id)
+        task = Task.query.get(pk)
         if not task:
             return {'message': 'Task does not exist'}, 400
         todolist = TodoList.query.filter_by(id=data.todolist_id).first()
@@ -84,13 +84,13 @@ class TaskAPI(Resource):
         result = task_schema.dump(task)
         return {"status": 'success', 'task': result}, 204
 
-    def delete(self, id):
+    def delete(self, pk):
         """
-        delete a task
-        :param id: task id
+        provide deleting a task
+        :param pk: task id
         :return:
         """
-        task = Task.query.get(id)
+        task = Task.query.get(pk)
         if not task:
             return {'message': 'Task does not exist'}, 400
         db.session.delete(task)
@@ -101,13 +101,13 @@ class TaskAPI(Resource):
 
 class TaskFinish(Resource):
 
-    def put(self, id):
+    def put(self, pk):
         """
         custom method which allow to mark task done
         :param id: task_id
         :return:
         """
-        task = Task.query.get(id)
+        task = Task.query.get(pk)
         if not task:
             return {'status': 'error', 'message': 'Task not found'}, 400
         json_data = request.get_json(force=True)
